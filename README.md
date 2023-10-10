@@ -1,44 +1,43 @@
+## Documentation
 
-## Dokumentace
+### Overview
 
-### Přehled
+This code is designed to automatically scrape data from the real estate website [www.sreality.cz](https://www.sreality.cz/hledani/prodej/byty/praha?strana=1 "www.sreality.cz"). Using this code, you can extract information about apartments offered for sale in Prague and save them to a file named `data.json`.
 
-Tento kód je určen k automatickému sběru dat z realitního webu [www.sreality.cz](https://www.sreality.cz/hledani/prodej/byty/praha?strana=1 "www.sreality.cz"). Pomocí tohoto kódu lze vytáhnout informace o bytech nabízených k prodeji v Praze a uložit je do souboru `data.json`.
+### Libraries Used
 
-### Použité knihovny
+-   `cheerio`: Used for parsing and extracting data from HTML.
+-   `puppeteer`: A library for browser automation (e.g., navigating to a page and fetching its content).
+-   `fs`: Node.js module for file system operations.
 
-- `cheerio`: Používá se k analýze a extrakci dat z HTML.
-- `puppeteer`: Knihovna pro automatizaci akcí v prohlížeči (např. navigace na stránku a získání jejího obsahu).
-- `fs`: Modul Node.js pro práci se souborovým systémem.
-
-### Funkce
+### Functions
 
 #### `getPageHtml(pageNumber)`
 
-Tato asynchronní funkce je odpovědná za načtení obsahu webové stránky.
+This asynchronous function is responsible for fetching the web page's content.
 
-- **Argumenty**:
-  - `pageNumber`: Číslo stránky k načtení.
-- **Vrací**: HTML obsah stránky nebo `null` v případě chyby.
+-   **Arguments**:
+    -   `pageNumber`: The page number to fetch.
+-   **Returns**: The HTML content of the page or `null` in case of an error.
 
 #### `scrapeData(pageNumber)`
 
-Tato asynchronní funkce provádí hlavní úkol extrakce dat a jejich ukládání.
+This asynchronous function performs the main task of data extraction and saving.
 
-- **Argumenty**:
-  - `pageNumber`: Číslo stránky, ze kterého začíná sběr dat.
-- **Akce**:
-  1. Načte HTML obsah stránky.
-  2. Používá `cheerio` k analýze a extrakci dat o bytech.
-  3. Kontroluje, zda soubor `data.json` existuje a pokud ano, načte stávající data.
-  4. Přidá nová data k existujícím.
-  5. Uloží kombinovaná data do `data.json`.
-  6. Pokračuje na další stránku, pokud aktuální stránka není poslední.
+-   **Arguments**:
+    -   `pageNumber`: The starting page number for data scraping.
+-   **Actions**:
+    1. Loads the HTML content of the specified page.
+    2. Uses `cheerio` to parse and extract apartment data.
+    3. Checks if the `data.json` file exists and, if so, loads the existing data.
+    4. Appends the new data to the existing data.
+    5. Saves the combined data to `data.json`.
+    6. Moves to the next page if the current page isn't the last one.
 
-### Spuštění
+### Execution
 
-Kód automaticky začne sbírat data z první stránky při jeho spuštění.
+The code automatically starts scraping data from the first page upon execution.
 
-### Výsledek
+### Result
 
-Po dokončení práce kódu budou všechna shromážděná data uložena v souboru `data.json`.
+After the code completes its execution, all the scraped data will be saved in the `data.json` file.
